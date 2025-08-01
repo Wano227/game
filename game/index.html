@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlock My Heart 💌</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #FFA07A, #FFE5B4);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background: #fff8f2;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      color: #d35400;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #f39c12;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e67e22;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .love-letter {
+      font-family: 'Georgia', serif;
+      font-size: 18px;
+      white-space: pre-wrap;
+      color: #4b2e00;
+      background: #fff5e1;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px dashed #f39c12;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_b52bfcfb5d.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="start-screen">
+  <h1>Unlock My Heart 💌</h1>
+  <p>A little game made just for you.</p>
+  <button onclick="startGame()">Start</button>
+</div>
+
+<div class="container hidden" id="quiz-screen">
+  <h2 id="question-title"></h2>
+  <input type="text" id="answer-input" placeholder="Your answer..." />
+  <button onclick="checkAnswer()">Submit</button>
+  <p id="feedback" style="color: red;"></p>
+</div>
+
+<div class="container hidden" id="letter-screen">
+  <h2>💖 You did it! 💖</h2>
+  <div class="love-letter">
+    Hi baby, this is just a small thing i decided to do just to, you know, celebrate girlfriend's day.
+    <br><br>
+    Thank you so much for being my joy, my heart, my everything. you've truly been everything i want and need
+    <br><br>
+    i love you so much baby and i will always love you ❤️❤️💕
+    <br><br>
+    — Pascal 💕
+  </div>
+</div>
+
+<script>
+  const questions = [
+    { q: "What is my confirmation name?", a: "benedict" },
+    { q: "What is my favorite food?", a: "spaghetti" },
+    { q: "What day is our anniversary?", a: "february 21" }
+  ];
+
+  let currentQuestion = 0;
+
+  function startGame() {
+    document.getElementById('start-screen').classList.add('hidden');
+    document.getElementById('quiz-screen').classList.remove('hidden');
+    showQuestion();
+  }
+
+  function showQuestion() {
+    document.getElementById('question-title').textContent = questions[currentQuestion].q;
+    document.getElementById('answer-input').value = '';
+    document.getElementById('feedback').textContent = '';
+  }
+
+  function checkAnswer() {
+    const userAnswer = document.getElementById('answer-input').value.trim().toLowerCase();
+    const correctAnswer = questions[currentQuestion].a.toLowerCase();
+
+    if (userAnswer === correctAnswer) {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showLoveLetter();
+      }
+    } else {
+      document.getElementById('feedback').textContent = "Hmm... try again, love 💛";
+    }
+  }
+
+  function showLoveLetter() {
+    document.getElementById('quiz-screen').classList.add('hidden');
+    document.getElementById('letter-screen').classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
